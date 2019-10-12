@@ -1,24 +1,17 @@
 class PhoneConverter
     
     def initialize
-      #check_dictionary
+      check_dictionary
       input_number
     end
 
 	# code to check if the given word exists in dictionary
 	def check_dictionary
-	  @file =[]
-	  puts "enter any word"
-	  word = gets.chomp
-	  word =word.downcase
-	  puts "word is #{word}"
-	  File.read("dictionary.txt").split("\n").map{|word| @file << word.downcase }
+	  @dictionary_words =[]
+	  
+	  @dictionary_words = File.read("dictionary.txt").split("\n").map{|word| @dictionary_words << word.downcase }
 	 
-	  if @file.include?(word)
-	    puts "following word #{word} exists in dictionary"
-	   else
-	   puts	"following word #{word} does not exist in dictionary"
-	   end
+	
 	end
    
    #method to input phone number
@@ -55,17 +48,20 @@ class PhoneConverter
 	end
 
 	def character_number_conv(number)
-     @word_converter=[]
+     useful_words=[]
      number = number.to_s.split("")
-     number.each do |num|
-       @words.each_with_index do |key,value|
-       	 if num == key[0]
-       	 	@word_converter << key[1]
-       	 end
-       end
-     end
-     puts "words for given number #{number} are #{@word_converter}"
-	end
+     key_characters = number.map{|n| @words[n]}
+     
+   
+
+     key_words = key_characters.shift.product(*key_characters).map(&:join)
+  
+   
+     useful_words << ( @dictionary_words & key_words)
+   
+  
+    puts useful_words
+  end
 
 end
 
