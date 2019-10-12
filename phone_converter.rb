@@ -9,7 +9,7 @@ class PhoneConverter
 	  @file =[]
 	  puts "enter any word"
 	  word = gets.chomp
-	  word.downcase
+	  word =word.downcase
 	  puts "word is #{word}"
 	  File.read("dictionary.txt").split("\n").map{|word| @file << word.downcase }
 	 
