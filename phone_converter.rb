@@ -48,19 +48,13 @@ class PhoneConverter
 	end
 
 	def character_number_conv(number)
-     useful_words=[]
-     number = number.to_s.split("")
-     key_characters = number.map{|n| @words[n]}
-     
-   
-
-     key_words = key_characters.shift.product(*key_characters).map(&:join)
-  
-   
-     useful_words << ( @dictionary_words & key_words)
-   
-  
-    puts useful_words
+	 word_collection = []
+     number = number.split("")
+     characters = number.map{|n| @words[n]}
+     key_words = characters.shift.product(*characters).map(&:join)
+       matches = @dictionary_words[0] & key_words
+     word_collection << matches
+     puts word_collection.flatten(1)
   end
 
 end
