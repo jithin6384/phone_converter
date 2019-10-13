@@ -54,7 +54,6 @@ class PhoneConverter
 	     characters = number.map{|n| @words[n]}
 	     char_array = characters.shift.product(*characters).map(&:join)
 	     char_word_conv(char_array)
-   
              @word_collection = @dictionary_words[0] & @word_collection.flatten
         p @word_collection
     end
@@ -76,7 +75,7 @@ class PhoneConverter
     def match_word(char,i)
     	@matches = []
       j= 0
-      while (i+j) <= char.length do
+      while (i+j) < char.length do
       	@matches <<  char[j..(i+j)].join("").split()
       	# puts matches.class
       	# @word_collection << matches
