@@ -48,14 +48,47 @@ class PhoneConverter
 	end
 
 	def character_number_conv(number)
-	 word_collection = []
-     number = number.split("")
-     characters = number.map{|n| @words[n]}
-     key_words = characters.shift.product(*characters).map(&:join)
-       matches = @dictionary_words[0] & key_words
-     word_collection << matches
-     puts word_collection.flatten(1)
-  end
+		 
+		 @word_collection =[]
+	     number = number.split("")
+	     characters = number.map{|n| @words[n]}
+	     char_array = characters.shift.product(*characters).map(&:join)
+	     char_word_conv(char_array)
+   
+             @word_collection = @dictionary_words[0] & @word_collection.flatten
+        p @word_collection
+    end
+
+    def char_word_conv(char_array)
+       @word_collections = []
+       i =2
+        while i < 7 do
+         char_array.uniq.each do |char|
+           match_word(char.split(""),i)
+           @word_collection << @matches
+        end
+        
+        i += 1
+       end
+       # p @word_collection
+    end
+
+    def match_word(char,i)
+    	@matches = []
+      j= 0
+      while (i+j) <= char.length do
+      	@matches <<  char[j..(i+j)].join("").split()
+      	# puts matches.class
+      	# @word_collection << matches
+       j +=1
+      end
+      # @dictionary_words[0] & @matches.uniq
+      # puts @matches.count
+      # puts @matches
+      # puts @matches.class
+       # @word_collection.uniq
+
+    end
 
 end
 
